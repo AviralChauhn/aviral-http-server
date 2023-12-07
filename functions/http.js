@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+function htmlContent(request, response) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(`
+  <!DOCTYPE html>
 <html>
   <head>
   </head>
@@ -8,3 +11,6 @@
 
   </body>
 </html>
+  `);
+}
+module.exports = htmlContent;
