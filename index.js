@@ -55,21 +55,17 @@ app.get("/uuid", (req, res) => {
 app.get("/status/:status", (req, res) => {
   const statusCode = parseInt(req.params.status);
   if (statusCode >= 100 && statusCode <= 599) {
-    // res.writeHead(statusCode, { "Content-Type": "text/plain" });
-    app.use((req, res, next) => {
-      res.status(statusCode);
-      next();
-    });
-    res.send(`status:${statusCode}`);
+    res.status(statusCode).send(`status:${statusCode}`);
   } else {
     res.send(`invalid status`);
   }
 });
 app.get("/delay/:delayInSeconds", (req, res) => {
-  if (req.params.delayInSeconds != null) {
+  const seconds = parseInt(req.params.delayInSeconds);
+  if (seconds != NaN) {
     setTimeout(() => {
-      res.send(`delayed by ${req.params.delayInSeconds}`);
-    }, req.params.delayInSeconds * 1000);
+      res.send(`delayed by ${seconds} seconds`);
+    }, seconds * 1000);
   } else {
     res.send(`please specify delay value in url`);
   }
