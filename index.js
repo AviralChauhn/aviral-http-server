@@ -62,7 +62,7 @@ app.get("/status/:status", (req, res) => {
 });
 app.get("/delay/:delayInSeconds", (req, res) => {
   const seconds = parseInt(req.params.delayInSeconds);
-  if (seconds != NaN) {
+  if (!isNaN(seconds)) {
     setTimeout(() => {
       res.send(`delayed by ${seconds} seconds`);
     }, seconds * 1000);
